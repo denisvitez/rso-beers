@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgres-beers-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgres-beers
+  template:
+    metadata:
+      labels:
+        app: postgres-beers
+    spec:
+      containers:
+      - image: postgres:10.5
+        name: postgres-beers
+        env:
+        - name: POSTGRES_USER
+          value: dbuser
+        - name: POSTGRES_DB
+          value: beers
+        - name: POSTGRES_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: pg-pass
+              key: KUMULUZEE_DATASOURCES0_PASSWORD
+        ports:
+        - containerPort: 5432
+          protocol: TCP
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres-beers
+spec:
+  type: ClusterIP
+  ports:
+  - port: 5432
+    protocol: TCP
+    targetPort: 5432
+  selector:
+    app: postgres-scores
