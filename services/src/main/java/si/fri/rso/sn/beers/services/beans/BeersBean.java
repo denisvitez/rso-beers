@@ -42,7 +42,7 @@ public class BeersBean {
 
 
     public List<Beer> getBeers() {
-        TypedQuery<Beer> query = em.createNamedQuery("Beer.getAll", Beer.class);
+        TypedQuery<Beer> query = em.createNamedQuery("Beers.getAll", Beer.class);
         System.out.println(query.toString());
         return query.getResultList();
     }

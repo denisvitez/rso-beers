@@ -36,7 +36,7 @@ public class BeersResource {
 
     @POST
     public Response createBeer(Beer beer) {
-        if (beer.getName() == null || beer.getStyle() == null || beer.getAlcohol() > 0 || beer.getBreweryId() != 0) {
+        if (beer.getName() == null || beer.getStyle() == null || beer.getAlcohol() <= 0 || beer.getBreweryId() <= 0) {
             return Response.status(Response.Status.BAD_REQUEST).build();
         } else {
             beer = bean.createBeer(beer);
@@ -50,7 +50,7 @@ public class BeersResource {
     }
 
     @DELETE
-    @Path("{brewerId}")
+    @Path("{beerId}")
     public Response deleteBrewer(@PathParam("beerId") int beerId) {
         boolean deleted = bean.deleteBeer(beerId);
         if (deleted) {
