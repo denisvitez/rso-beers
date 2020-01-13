@@ -15,13 +15,13 @@ import java.util.List;
 
 @Log
 @ApplicationScoped
-@Path("/scores")
+@Path("/beers")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class BeersResource {
 
     @Inject
-    private BeersBean beersBean;
+    private BeersBean bean;
 
     @Context
     protected UriInfo uriInfo;
@@ -29,8 +29,34 @@ public class BeersResource {
     @GET
     public Response getBeers() {
 
-        List<Beer> scores = beersBean.getBeers();
+        List<Beer> beers = bean.getBeers();
 
-        return Response.ok(scores).build();
+        return Response.ok(beers).build();
+    }
+
+    @POST
+    public Response createBeer(Beer beer) {
+        if (beer.getName() == null || beer.getStyle() == null || beer.getAlcohol() > 0 || beer.getBreweryId() != 0) {
+            return Response.status(Response.Status.BAD_REQUEST).build();
+        } else {
+            beer = bean.createBeer(beer);
+        }
+        //Handle success/failure
+        if (beer.getId() != null) {
+            return Response.status(Response.Status.CREATED).entity(beer).build();
+        } else {
+            return Response.status(Response.Status.CONFLICT).entity(beer).build();
+        }
+    }
+
+    @DELETE
+    @Path("{brewerId}")
+    public Response deleteBrewer(@PathParam("beerId") int beerId) {
+        boolean deleted = bean.deleteBeer(beerId);
+        if (deleted) {
+            return Response.status(Response.Status.GONE).build();
+        } else {
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
     }
 }

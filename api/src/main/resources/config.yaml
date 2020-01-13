@@ -1,22 +1,22 @@
 kumuluzee:
-  name: sn-scores
+  name: sn-beers
   env:
     name: dev
   version: 1.0.0
   server:
-    base-url: http://localhost:8080
+    base-url: http://localhost:5101
     http:
-      port: 8080
+      port: 5101
   datasources:
-    - jndi-name: jdbc/ScoresDS
-      connection-url: jdbc:postgresql://18.236.151.24:5432/scores
+    - jndi-name: jdbc/BeersDS
+      connection-url: jdbc:postgresql://18.236.151.24:5432/beers
       username: dbuser
       password: postgres
       max-pool-size: 20
   health:
     checks:
       data-source-health-check:
-        jndi-name: jdbc/ScoresDS
+        jndi-name: jdbc/BeersDS
   config:
     etcd:
       hosts: http://localhost:2379
@@ -25,11 +25,11 @@ kumuluzee:
       hosts: http://localhost:2379
   metrics:
     web-instrumentation:
-    - name: scores-endpoint
-      url-pattern: /v1/scores/*
+    - name: beers-endpoint
+      url-pattern: /v1/beers/*
   logs:
     config-file: '<?xml version="1.0" encoding="UTF-8"?>
-                    <Configuration name="users">
+                    <Configuration name="beers">
                         <Appenders>
                             <Console name="console" target="SYSTEM_OUT">
                                 <PatternLayout pattern="%d %p %marker %m %X %ex %n"/>

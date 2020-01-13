@@ -1,4 +1,4 @@
-# rso-scores
+# rso-beers
 Microservice for beers
 
 ```bash

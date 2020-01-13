@@ -13,11 +13,17 @@ public class Beer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "value")
-    private double value;
+    @Column(name = "alcohol")
+    private double alcohol;
 
-    @Column(name = "comment")
-    private String comment;
+    @Column(name = "style")
+    private String style;
+
+    @Column(name = "breweryId")
+    private int breweryId;
+
+    @Column(name = "name")
+    private String name;
 
     @Column(name = "date_inserted")
     private Instant dateInserted;
@@ -30,20 +36,36 @@ public class Beer {
         this.id = id;
     }
 
-    public double getValue() {
-        return value;
+    public double getAlcohol() {
+        return alcohol;
     }
 
-    public void setValue(double value) {
-        this.value = value;
+    public void setAlcohol(double alcohol) {
+        this.alcohol = alcohol;
     }
 
-    public String getComment() {
-        return comment;
+    public String getStyle() {
+        return style;
     }
 
-    public void setComment(String comment) {
-        this.comment = comment;
+    public void setStyle(String style) {
+        this.style = style;
+    }
+
+    public int getBreweryId() {
+        return breweryId;
+    }
+
+    public void setBreweryId(int breweryId) {
+        this.breweryId = breweryId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Instant getDateInserted() {

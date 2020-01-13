@@ -1,4 +1,4 @@
-version: "1"
+version: "2.2"
 services:
   postgres:
     image: postgres:10.5
@@ -8,10 +8,10 @@ services:
       POSTGRES_USER: dbuser
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: beers
-  sn-scores:
+  sn-beers:
     image: denisvitez/rso-beers:latest
     ports:
-      - 8080:8080
+      - 5101:5101
     environment:
       KUMULUZEE_DATASOURCES0_CONNECTIONURL: jdbc:postgresql://postgres:5432/beers
       KUMULUZEE_CONFIG_ETCD_HOSTS: http://etcd:2379
