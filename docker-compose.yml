@@ -9,7 +9,7 @@ services:
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: beers
   sn-beers:
-    image: denisvitez/rso-beers:7
+    image: denisvitez/rso-beers:10
     ports:
       - 5101:5101
     environment:

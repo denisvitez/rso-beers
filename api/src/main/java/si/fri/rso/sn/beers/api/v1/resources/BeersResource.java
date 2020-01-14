@@ -28,10 +28,16 @@ public class BeersResource {
 
     @GET
     public Response getBeers() {
-
         List<Beer> beers = bean.getBeers();
-
         return Response.ok(beers).build();
+    }
+
+    @GET
+    @Path("/filtered")
+    public Response getBeersFiltered() {
+        List<Beer> beers;
+        beers = bean.getBeersFilter(uriInfo);
+        return Response.status(Response.Status.OK).entity(beers).build();
     }
 
     @POST

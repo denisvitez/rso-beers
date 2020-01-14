@@ -57,6 +57,12 @@ public class BeersBean {
         return item;
     }
 
+    public List<Beer> getBeersFilter(UriInfo uriInfo) {
+        QueryParameters queryParameters = QueryParameters.query(uriInfo.getRequestUri().getQuery()).defaultOffset(0)
+                .build();
+        return JPAUtils.queryEntities(em, Beer.class, queryParameters);
+    }
+
     public Beer createBeer(Beer beer) {
         try {
             beginTx();
