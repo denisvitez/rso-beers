@@ -6,6 +6,6 @@ WORKDIR /app
 
 ADD ./api/target/beers-api-1.0.0-SNAPSHOT.jar /app
 
-EXPOSE 5101
+EXPOSE 8080
 
 CMD java -jar beers-api-1.0.0-SNAPSHOT.jar

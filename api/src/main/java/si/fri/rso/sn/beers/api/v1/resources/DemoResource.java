@@ -28,10 +28,6 @@ public class DemoResource {
     @Inject
     private AppProperties appProperties;
 
-    @Inject
-    @DiscoverService(value="sn-scores", accessType=AccessType.DIRECT)
-    private Optional<String> baseUrlScores;
-
     @POST
     @Path("healthy")
     public Response setHealth(HealthDto health) {
