@@ -33,6 +33,16 @@ public class BeersResource {
     }
 
     @GET
+    @Path("/{beerId}")
+    public Response getBeer(@PathParam("beerId") Integer beerId) {
+        Beer b = bean.getBeer(beerId);
+        if (b == null) {
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
+        return Response.status(Response.Status.OK).entity(b).build();
+    }
+
+    @GET
     @Path("/filtered")
     public Response getBeersFiltered() {
         List<Beer> beers;
@@ -52,6 +62,20 @@ public class BeersResource {
             return Response.status(Response.Status.CREATED).entity(beer).build();
         } else {
             return Response.status(Response.Status.CONFLICT).entity(beer).build();
+        }
+    }
+
+    @PUT
+    @Path("{beerId}")
+    public Response putBrewer(@PathParam("beerId") Integer beerId, Beer b) {
+        b = bean.putBeer(beerId, b);
+        if (b == null) {
+            return Response.status(Response.Status.NOT_FOUND).build();
+        } else {
+            if (b.getId() != null)
+                return Response.status(Response.Status.OK).entity(b).build();
+            else
+                return Response.status(Response.Status.NOT_MODIFIED).build();
         }
     }
 

@@ -13,7 +13,7 @@ spec:
         app: beer
     spec:
       containers:
-      - image: denisvitez/rso-beers:20
+      - image: denisvitez/rso-beers:latest
         name: beers
         env:
         - name: KUMULUZEE_DISCOVERY_CLUSTER
@@ -47,7 +47,7 @@ metadata:
 spec:
   type: LoadBalancer
   ports:
-  - port: 8080
+  - port: 8082
     protocol: TCP
     targetPort: 8080
   selector:

@@ -74,7 +74,7 @@ public class BeersBean {
         return beer;
     }
 
-    public Beer putScore(Integer beerId, Beer beer) {
+    public Beer putBeer(Integer beerId, Beer beer) {
         Beer b = em.find(Beer.class, beerId);
         if (b == null) {
             return null;
